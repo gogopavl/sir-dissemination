@@ -8,8 +8,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 public class SIR {
-	
-
 	private Graph sir_graph;
 
 	private ArrayList<Vertex> infectious = new ArrayList<Vertex>();

@@ -1,63 +1,66 @@
 package graph_structure;
+
 /**
- * Class that represents a vertex
- *
+ * Class implementing a vertex
+ * @author gogopavl
  */
 public class Vertex {
-	private int index;
-	private Vertex ancestor1;
-	private Vertex ancestor2;
-	private String state;
-	private double inf_time;
+	private int index; // Any vertex is unique - identifier
+	private String state; // The state e.g. "I" for infected
+	private double infTime; // The time since the vertex changed state
 	
+        /**
+         * Vertex constructor
+         * @param index The given integer - identifier
+         */
 	public Vertex(int index){
 		this.index = index;
-		ancestor1 = null;
-		ancestor2 = null;
 	}
-	
-	public Vertex(Vertex ancestor1,Vertex ancestor2){
-		String temp = Integer.toString(ancestor1.getIndex()) + Integer.toString(ancestor2.getIndex());
-		this.ancestor1 = ancestor1;
-		this.ancestor2 = ancestor2;
-		index = Integer.parseInt(temp);
-	}
-
+        
+        /**
+         * Getter method for Vertex index
+         * @return The index value (int)
+         */
 	public int getIndex() {
 		return index;
 	}
-
+        
+        /**
+         * Setter method for Vertex index
+         * @param index An integer number (>0)
+         */
 	public void setIndex(int index) {
 		this.index = index;
 	}
-
-	public Vertex getAncestor1() {
-		return ancestor1;
-	}
-
-	public void setAncestor1(Vertex ancestor1) {
-		this.ancestor1 = ancestor1;
-	}
-
-	public Vertex getAncestor2() {
-		return ancestor2;
-	}
-
-	public void setAncestor2(Vertex ancestor2) {
-		this.ancestor2 = ancestor2;
-	}
+        /**
+         * Getter method for Vertex state
+         * @return The state value (String)
+         */
 	public String getState() {
 		return state;
 	}
-
-	public void setState(String st) {
-		this.state = st;
+        
+        /**
+         * Setter method for Vertex state
+         * @param state A String (S, I, R)
+         */
+	public void setState(String state) {
+		this.state = state;
 	}
+        
+        /**
+         * Getter method for Vertex infTime
+         * @return Value of infTime (double)? - check
+         */
 	public double getInfTime() {
-		return inf_time;
+		return infTime;
 	}
 
-	public void setInfTime(double it) {
-		this.inf_time = it;
+        /**
+         * Setter method for Vertex infTime
+         * @param infTime A double
+         */
+	public void setInfTime(double infTime) {
+		this.infTime = infTime;
 	}
 }

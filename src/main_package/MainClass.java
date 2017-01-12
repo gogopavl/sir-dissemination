@@ -9,9 +9,18 @@ import java.util.*;
 
 public class MainClass {
 
-	
+	/**
+         * Main method to create instances and invoke all needed functions
+         * @param args None
+         *
+         * @throws NumberFormatException
+         * @throws IOException 
+         * 
+         * @author gogopavl
+         */
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		ArrayList<Graph> graphs = fromFileToGraph();	//read input from file
+		
+                ArrayList<Graph> graphs = fromFileToGraph();	//read input from file
 		HashMap<Integer, Vertex> source = fromFileToSource(); //read infected nodes from file
 		
 		double beta = 0.01; //infection probability
@@ -63,7 +72,7 @@ public class MainClass {
 	
 	/**
 	 * Method that writes output to a file named "output.txt"
-	 * @param list
+	 * @param list 
 	 * @throws IOException
 	 */
 	public static void writeResultToFile(ArrayList<ArrayList<Vertex>> list) throws IOException{
@@ -96,13 +105,9 @@ public class MainClass {
 		in.close();
 		
 		return infectedNodesSet;
-		
 	}
-	
-	
 	/**
 	 * Method that reads input -graphs- from file
-	 * 
 	 * @return The graph
 	 * @throws NumberFormatException
 	 * @throws IOException
@@ -164,7 +169,6 @@ public class MainClass {
 	}
 	/**
 	 * Method that gets a certain vertex from a given list
-	 * 
 	 * @param vertices
 	 * @param integer
 	 * @return
@@ -178,7 +182,6 @@ public class MainClass {
 	}
 	/**
 	 * Boolean method that returns "true" if the given vertices are linked, otherwise it returns "false"
-	 * 
 	 * @param vertex1
 	 * @param vertex2
 	 * @param links
