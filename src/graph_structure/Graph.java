@@ -1,5 +1,8 @@
 package graph_structure;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -105,6 +108,35 @@ public class Graph {
 		}
 		return false;
 	}
+        
+        /**
+	 * Boolean method that determines whether two vertices are linked, or not
+	 * @param vertex1 The first Vertex
+	 * @param vertex2 The second Vertex
+	 * @param links An ArrayList of links
+	 * @return true if the given vertices are linked, otherwise false
+	 */
+	public static Boolean isLinked(Vertex vertex1, Vertex vertex2, ArrayList<Link> links){
+		for(Link link : links){
+			if((link.getFirstVertex().equals(vertex1) && link.getSecondVertex().equals(vertex2)) || (link.getFirstVertex().equals(vertex2) && link.getSecondVertex().equals(vertex1)) )
+				return true;
+		}
+		return false;
+	}
+        
+        /**
+	 * Method that returns a certain Vertex from a given list of Vertices based on its index
+	 * @param vertices The ArrayList of vertices
+	 * @param index The Vertex index
+	 * @return The wanted Vertex
+	 */
+	public static Vertex fetchVertex(ArrayList<Vertex> vertices, int index){
+		for (Vertex vertex : vertices){
+			if(vertex.getIndex()==index)
+				return vertex;
+		}
+		return null;
+	}
 	
         /**
          * Method that returns the Link between two vertices, if it exists
@@ -206,5 +238,70 @@ public class Graph {
 		for(Link link : links){
 			System.out.println("("+link.getFirstVertex().getIndex()+","+link.getSecondVertex().getIndex()+") Link Weight: "+link.getWeight());
 		}
+	}
+        
+        /**
+	 * Method that reads input -graphs- from file
+	 * @return The Graph structure(s)
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
+	public static ArrayList<Graph> fromFileToGraph() throws NumberFormatException, IOException{
+		ArrayList<Graph> graphs = new ArrayList<>();
+		BufferedReader in = new BufferedReader(new FileReader("input.txt"));
+		ArrayList<Integer> ints = null;
+		ArrayList<Vertex> vertices = null;
+		ArrayList<Link> links = null;
+		String line;
+		Graph graph;
+		while((line = in.readLine()) != null)
+		{
+			if (line.charAt(0) == '#'){	
+				graph = new Graph(vertices,links);
+				if(graph.getVertices()!=null)
+					graphs.add(graph);	
+				ints = new ArrayList<Integer>();
+				vertices = new ArrayList<Vertex>();
+				links = new ArrayList<Link>();
+			}
+			else
+			{
+				int i=0;
+				Vertex lineVertex = null;
+				Vertex linkVertex = null;
+				int weight = 0;
+				for (String part : line.split("\\s+")) {
+					Vertex vertex = null;
+					Integer vertexNumber = Integer.valueOf(part);
+					if(ints.contains(vertexNumber)){
+						vertex = Graph.fetchVertex(vertices,vertexNumber);
+					}
+					else if(!ints.contains(vertexNumber) && i==0 || i==1){
+						ints.add(vertexNumber);
+						vertex = new Vertex(vertexNumber);
+						vertices.add(vertex);
+					}
+                                        
+                                        switch (i) {
+                                            case 0:
+                                                lineVertex = vertex;
+                                                break;
+                                            case 1:
+                                                linkVertex = vertex;
+                                                break;
+                                            default:
+                                                weight = Integer.valueOf(part);
+                                                break;
+                                        }
+					i++;
+				}
+				if (!Graph.isLinked(lineVertex,linkVertex,links)){
+					Link link = new Link(lineVertex,linkVertex,weight);
+					links.add(link);	
+				}
+			}
+		}
+		in.close();
+		return graphs;
 	}
 }
