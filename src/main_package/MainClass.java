@@ -1,5 +1,9 @@
 package main_package;
 
+import virus_package.SIR;
+import graph_structure.Link;
+import graph_structure.Vertex;
+import graph_structure.Graph;
 import java.io.*;
 import java.util.*;
 

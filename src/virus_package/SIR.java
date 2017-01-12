@@ -1,5 +1,7 @@
-package main_package;
+package virus_package;
 
+import graph_structure.Vertex;
+import graph_structure.Graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;

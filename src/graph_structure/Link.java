@@ -1,4 +1,4 @@
-package main_package;
+package graph_structure;
 
 /**
  * Class that implements a link between two vertices
